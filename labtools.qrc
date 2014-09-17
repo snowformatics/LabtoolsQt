@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="images">
+    <file>to_copy/images/mixer.png</file>
+    <file>to_copy/images/dil.jpg</file>
+    <file>to_copy/images/dna.png</file>
+    <file>to_copy/images/flask.png</file>
+  </qresource>
+</RCC>

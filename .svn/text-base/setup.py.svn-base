@@ -1,0 +1,20 @@
+# -*- coding: utf-8 -*-
+from distutils.core import setup
+setup(
+        name = "LabtoolsQt",
+        version = "1.0",
+        description = "LabtoolsQt Software",
+        author = "Stefanie Lück",
+        author_email = "luecks@gmail.com",
+        url = "",
+        package_dir = { "":"src" },
+        packages =  ["labtools_main", "labtools.ui"],
+        scripts = ["labtools_main"],
+        long_description = "bla"
+        
+        )
+    
+        
+       
+        
+       
