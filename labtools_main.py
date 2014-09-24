@@ -7,13 +7,23 @@ import platform
 import webbrowser
 import errno
 
-from PyQt4 import QtGui
+from PyQt4 import QtGui, QtCore
 from labtools_ui import Ui_LabtoolsQt
 
 import calculate_reactions
 
 #pyrcc4 labtools.qrc > rc_labtools.py
 #pyuic4 labtools.ui > labtools_ui.py
+
+class AboutPopup(QtGui.QWidget):
+    def __init__(self, images_location):
+        QtGui.QWidget.__init__(self)
+
+        self.setWindowTitle('LabtoolsQt v. 1.0.3')
+        self.images_location = images_location
+        label = QtGui.QLabel(self)
+        pixmap = QtGui.QPixmap(self.images_location + "about.png")
+        label.setPixmap(pixmap)
 
 class MyMainWindow(QtGui.QMainWindow):
     def __init__(self, *args):
@@ -22,6 +32,7 @@ class MyMainWindow(QtGui.QMainWindow):
 
         # Main paths
         self.data_location = str(QtGui.QDesktopServices.storageLocation(QtGui.QDesktopServices.DataLocation))
+        self.data_location = self.data_location.split('Local')[0] + '/Local/'
         self.home_location = str(QtGui.QDesktopServices.storageLocation(QtGui.QDesktopServices.HomeLocation))
         self.temp_location = str(QtGui.QDesktopServices.storageLocation(QtGui.QDesktopServices.TempLocation))
         self.app_location = self.data_location + '/LabtoolsQt/'
@@ -151,24 +162,14 @@ class MyMainWindow(QtGui.QMainWindow):
 
     def show_about_message(self):
         """Shows about box."""
-
-        message = """LabtoolsQt v. 1.0.2 <br/>
-                     (C) 2014 Stefanie Lueck <br/>
-                     CC-BY-NC License <br/>
-                     If you have any comments or problems please contact the author via labtools[at]ipk-gatersleben.de
-                    <br/>
-                     <a href=\"http://labtools.ipk-gatersleben.de\">Homepage</a>"""
-
-        QtGui.QMessageBox.about(self,
-                                "About LabtoolsQT",
-                                """<p style="font-family: 'verdana'; font-size:10pt; color:#2E9AFE">"""
-                                      + message + """</p>""")
+        self.w = AboutPopup(self.images_location)
+        self.w.setGeometry(QtCore.QRect(100, 100, 610, 350))
+        self.w.show()
 
 
 
     def show_help(self):
         """Show help."""
-
         webbrowser.open("labtools.ipk-gatersleben.de/help/LabtoolsQt/LabtoolsQt.html")
 
 
